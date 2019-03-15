@@ -7,32 +7,40 @@ const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
 const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/37.8267,-122.4233`;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      weather: null
+    state = {
+      weather: null,
+      location: null
     }
+
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(position => {
+      const location = position.coords;
+			console.log('🐐: App -> getLocation -> location', location)
+      this.setState({
+        location: location
+      });
+    });
   }
 
   fetchWeatherData() {
-    return fetch(weatherDataUrl)
+    fetch(weatherDataUrl)
       .then(res => res.json())
-      .catch(error => console.log(error))
       .then(res => {
-				console.log('🐐: App -> fetchWeatherData -> res', res)
-        return res;
+        this.setState({
+          weather: res
+        });
       })
       .catch(error => console.log(error))
   }
   
 
   componentDidMount() {
+    this.getLocation();
     this.fetchWeatherData();
   }
 
   render() {
-
-
+		console.log('🐐: App -> render -> this.state', this.state)
     return (
       <div className="App">
         <header className="App-header">
