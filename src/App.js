@@ -3,44 +3,60 @@ import './App.css';
 
 import apiKey from './ApiKey';
 
-const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/37.8267,-122.4233`;
-
 class App extends Component {
     state = {
       weather: null,
-      location: null
+      location: null,
+      isLoading: false
     }
 
-  getLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-      const location = position.coords;
-			console.log('🐐: App -> getLocation -> location', location)
-      this.setState({
-        location: location
-      });
+  getUserLocation() {
+    return new Promise(resolve => {
+      navigator.geolocation.getCurrentPosition(position => {
+        const location = position.coords;
+        resolve(location);
+          console.log('🐐: App -> getUserLocation -> location', location)
+        this.setState({
+          location: location
+        });
+      })
     });
   }
 
   fetchWeatherData() {
+    const latitude = this.state.location.latitude;
+    const longitude = this.state.location.longitude;
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+    const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}`;
     fetch(weatherDataUrl)
       .then(res => res.json())
-      .then(res => {
+      .then(data => {
         this.setState({
-          weather: res
+          weather: data
         });
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
-  
+
+
+
+  getUserLocationBasedWeather() {      
+    const getWeather = async () => {
+      await this.getUserLocation();
+      this.fetchWeatherData();
+    }
+    getWeather();
+  }
 
   componentDidMount() {
-    this.getLocation();
-    this.fetchWeatherData();
+    // this.getUserLocation();
+    this.getUserLocationBasedWeather();
   }
 
   render() {
+
 		console.log('🐐: App -> render -> this.state', this.state)
+    
     return (
       <div className="App">
         <header className="App-header">
@@ -51,8 +67,5 @@ class App extends Component {
     );
   }
 }
-
-
-
 
 export default App;
