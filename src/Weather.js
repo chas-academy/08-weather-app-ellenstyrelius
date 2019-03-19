@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Weather({ weather }) {
-  const { summary, temperature, humidity, windSpeed, time } = weather.currently;
+function Weather({ weather, celsius }) {
+  const { summary, temperature, humidity, windSpeed } = weather.currently;
   const { sunriseTime, sunsetTime } = weather.daily.data[0];
-  const getHoursAndMinutes = (timestamp) => {
-    const fullDate = new Date(timestamp*1000);
+  const getCurrentTime = () => {
+    const fullDate = new Date();
     const hours = fullDate.getHours();
     const minutes = fullDate.getMinutes();
     if (minutes < 10) { 
@@ -13,11 +13,14 @@ function Weather({ weather }) {
       return hours + ':' + minutes;
     }
   }
+  const currentTime = getCurrentTime();
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const currentTime = getHoursAndMinutes(time);
-  const today = weekdays[new Date(time*1000).getDay()-1] + ' ' + currentTime;
-  const sunrise = getHoursAndMinutes(sunriseTime);
-  const sunset = getHoursAndMinutes(sunsetTime);
+  const today = weekdays[new Date().getDay()-1] + ' ' + currentTime;
+  const sunrise = new Date(sunriseTime*1000).toLocaleTimeString();
+  const sunset = new Date(sunsetTime*1000).toLocaleTimeString();
+  
+  console.log('🐐: Weather -> celsius', celsius)
+  const fahrenheit = temperature * 9 / 5 + 32;
 
   return (
     <section className="weatherData">
@@ -26,10 +29,11 @@ function Weather({ weather }) {
         <p>{summary}</p>
       </div>
       <div className="temp">
-        <p>temperature: {temperature}°C</p>
+        <p>{celsius ? temperature.toFixed(1) + '°C' 
+          : fahrenheit.toFixed(1) + '°F'}</p>
       </div>
       <div className="wind">
-        <p>wind speed: {windSpeed} m/s</p>
+        <p>wind: {windSpeed} m/s</p>
       </div>
       <div className="humidity">
         <p>humidity: {humidity}</p>

@@ -9,7 +9,8 @@ class App extends Component {
       weather: null,
       location: null,
       isLoading: true,
-      hasError: false
+      hasError: false,
+      tempInCelsius: true
     }
 
   getUserLocation() {
@@ -59,11 +60,22 @@ class App extends Component {
     this.getUserLocationBasedWeather();
   }
 
+  refresh = () => {
+    this.getUserLocationBasedWeather();
+  }
+
+  toggleUnit = () => {
+    this.setState({
+      tempInCelsius: !this.state.tempInCelsius
+    })
+    console.log('🐐: App -> toggleUnit -> this.state.tempInCelsius', this.state.tempInCelsius)
+  }
+
   render() {
 
     console.log('🐐: App -> render -> this.state', this.state)
     
-    const { location, weather, hasError, isLoading } = this.state;
+    const { location, weather, hasError, isLoading, tempInCelsius } = this.state;
     
     return (
       <div className="App">
@@ -72,14 +84,14 @@ class App extends Component {
           <h2>weather forecaster</h2>
         </header>
         <section className="geolocation">
-          {(!location && !weather && isLoading) &&
-            <div className="position">
-              <h3 className="loadingPosition">looking for your location</h3>
+          {(!weather && isLoading) &&
+            <div className="loadingWeather">
+              <h3>loading</h3>
             </div>
           }
           {(!location && hasError) &&
-            <div className="position">
-              <p className="error">sry, couldn't find you</p>
+            <div className="error">
+              <p>sorry, we couldn't find where you're at <span role="img" aria-label="robot face emoji">🤖</span></p>
             </div>
           }
           {(location && weather) &&
@@ -89,19 +101,25 @@ class App extends Component {
             </div>
           }
         </section>
+        {weather &&
+          <section className="buttons">
+            <button className="unitBtn" onClick={this.toggleUnit}>
+              {tempInCelsius ? 'fahrenheit' : 'celsius'}
+            </button>
+            <button className="refreshBtn" onClick={this.refresh}>
+              reload
+            </button>
+          </section>
+        }
         <section className="weather">
-          {(!weather && isLoading) &&
-            <div className="noWeather">
-              <p>loading weather...</p>
-            </div>
-          }
           {(!weather && hasError) && 
-            <div className="noWeather">
-              <p className="error">sry, we weren't able to get You a forecast</p>
+            <div className="error">
+              <p>sorry, we weren't able to get a weather forecast <span role="img" aria-label="robot face emoji">🤖</span></p>
+              <p>maybe try again in a couple of minutes?</p>
             </div>
           }
           {weather &&
-            <Weather weather={weather} />
+            <Weather weather={weather} celsius={tempInCelsius}/>
           }
         </section>
       </div>
