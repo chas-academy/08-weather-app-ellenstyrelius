@@ -97,7 +97,7 @@ class App extends Component {
           }
           {(!weather && hasError) && 
             <div className="noWeather">
-              <p className="error">something went wrong - we can't get You a forecast</p>
+              <p className="error">sry, we weren't able to get You a forecast</p>
             </div>
           }
           {weather &&
