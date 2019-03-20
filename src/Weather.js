@@ -1,10 +1,10 @@
 import React from 'react';
 
 function Weather({ weather, celsius }) {
-  const { summary, temperature, humidity, windSpeed } = weather.currently;
+  const { summary, temperature, humidity, windSpeed, time } = weather.currently;
   const { sunriseTime, sunsetTime } = weather.daily.data[0];
   const getCurrentTime = () => {
-    const fullDate = new Date();
+    const fullDate = new Date(time*1000);
     const hours = fullDate.getHours();
     const minutes = fullDate.getMinutes();
     if (minutes < 10) { 
@@ -15,11 +15,9 @@ function Weather({ weather, celsius }) {
   }
   const currentTime = getCurrentTime();
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  const today = weekdays[new Date().getDay()-1] + ' ' + currentTime;
+  const today = weekdays[new Date(time*1000).getDay()-1] + ' ' + currentTime;
   const sunrise = new Date(sunriseTime*1000).toLocaleTimeString();
   const sunset = new Date(sunsetTime*1000).toLocaleTimeString();
-  
-  console.log('🐐: Weather -> celsius', celsius)
   const fahrenheit = temperature * 9 / 5 + 32;
 
   return (
@@ -29,8 +27,8 @@ function Weather({ weather, celsius }) {
         <p>{summary}</p>
       </div>
       <div className="temp">
-        <p>{celsius ? temperature.toFixed(1) + '°C' 
-          : fahrenheit.toFixed(1) + '°F'}</p>
+        <p>{celsius ? temperature.toFixed(1) + ' °C' 
+          : fahrenheit.toFixed(1) + ' °F'}</p>
       </div>
       <div className="wind">
         <p>wind: {windSpeed} m/s</p>

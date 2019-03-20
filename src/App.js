@@ -3,6 +3,8 @@ import './App.css';
 
 import apiKey from './ApiKey';
 import Weather from './Weather';
+import WeatherWeek from './WeatherWeek';
+import UnitButton from './UnitButton';
 
 class App extends Component {
     state = {
@@ -60,19 +62,17 @@ class App extends Component {
     this.getUserLocationBasedWeather();
   }
 
-  refresh = () => {
+  handleRefresh = () => {
     this.getUserLocationBasedWeather();
   }
 
-  toggleUnit = () => {
+  handleToggleUnit = () => {
     this.setState({
       tempInCelsius: !this.state.tempInCelsius
     })
-    console.log('🐐: App -> toggleUnit -> this.state.tempInCelsius', this.state.tempInCelsius)
   }
 
   render() {
-
     console.log('🐐: App -> render -> this.state', this.state)
     
     const { location, weather, hasError, isLoading, tempInCelsius } = this.state;
@@ -83,12 +83,14 @@ class App extends Component {
           <h1>rain or shine</h1>
           <h2>weather forecaster</h2>
         </header>
-        <section className="geolocation">
-          {(!weather && isLoading) &&
+        <section className="loading">
+          {(isLoading) &&
             <div className="loadingWeather">
               <h3>loading</h3>
             </div>
           }
+        </section>
+        <section className="geolocation">
           {(!location && hasError) &&
             <div className="error">
               <p>sorry, we couldn't find where you're at <span role="img" aria-label="robot face emoji">🤖</span></p>
@@ -101,12 +103,10 @@ class App extends Component {
             </div>
           }
         </section>
-        {weather &&
+        {(location && weather) &&
           <section className="buttons">
-            <button className="unitBtn" onClick={this.toggleUnit}>
-              {tempInCelsius ? 'fahrenheit' : 'celsius'}
-            </button>
-            <button className="refreshBtn" onClick={this.refresh}>
+            <UnitButton handleToggleUnit={this.handleToggleUnit} tempInCelsius={tempInCelsius}/>
+            <button className="refreshBtn" onClick={this.handleRefresh}>
               reload
             </button>
           </section>
@@ -119,7 +119,10 @@ class App extends Component {
             </div>
           }
           {weather &&
-            <Weather weather={weather} celsius={tempInCelsius}/>
+            <Weather weather={weather} celsius={tempInCelsius} />
+          }
+          {weather &&
+            <WeatherWeek />
           }
         </section>
       </div>
