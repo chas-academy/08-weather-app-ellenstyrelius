@@ -1,9 +1,9 @@
 import React from 'react';
 
-function UnitButton({ handleToggleUnit, tempInCelsius }) {
+function UnitButton({ handleToggleUnit, tempIsCelsius }) {
     return(
         <button className="unitBtn" onClick={handleToggleUnit}>
-          {tempInCelsius ? 'fahrenheit' : 'celsius'}
+          {tempIsCelsius ? 'fahrenheit' : 'celsius'}
         </button>
     );
 }

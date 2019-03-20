@@ -11,7 +11,7 @@ class App extends Component {
       location: null,
       isLoading: true,
       hasError: false,
-      tempInCelsius: true
+      tempIsCelsius: true
     }
 
   getUserLocation() {
@@ -67,14 +67,14 @@ class App extends Component {
 
   handleToggleUnit = () => {
     this.setState({
-      tempInCelsius: !this.state.tempInCelsius
+      tempIsCelsius: !this.state.tempIsCelsius
     })
   }
 
   render() {
     console.log('🐐: App -> render -> this.state', this.state)
     
-    const { location, weather, hasError, isLoading, tempInCelsius } = this.state;
+    const { location, weather, hasError, isLoading, tempIsCelsius } = this.state;
     
     return (
       <div className="App">
@@ -104,7 +104,7 @@ class App extends Component {
         </section>
         {(location && weather) &&
           <section className="buttons">
-            <UnitButton handleToggleUnit={this.handleToggleUnit} tempInCelsius={tempInCelsius}/>
+            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
             <button className="refreshBtn" onClick={this.handleRefresh}>
               reload
             </button>
@@ -118,7 +118,7 @@ class App extends Component {
             </div>
           }
           {weather &&
-            <Weather weather={weather} tempInCelsius={tempInCelsius} />
+            <Weather weather={weather} tempIsCelsius={tempIsCelsius} />
           }
         </section>
       </div>

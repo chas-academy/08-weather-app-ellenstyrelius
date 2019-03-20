@@ -1,6 +1,6 @@
 import React from 'react';
 
-function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempInCelsius, tempInFahrenheit }) {
+function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempIsCelsius, getFahrenheitTemp }) {
   const { summary, temperature, humidity, windSpeed, time } = currentWeather;
   const getCurrentTime = () => {
     const fullDate = new Date(time*1000);
@@ -17,6 +17,7 @@ function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempInCelsius,
   const { sunriseTime, sunsetTime } = dailyWeather.data[0];
   const sunrise = new Date(sunriseTime*1000).toLocaleTimeString();
   const sunset = new Date(sunsetTime*1000).toLocaleTimeString();
+  const fahrenheitTemp = getFahrenheitTemp(temperature);
 
   return (
     <section className="weatherDataCurrent">
@@ -25,8 +26,8 @@ function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempInCelsius,
         <p>{summary}</p>
       </div>
       <div className="temp">
-        <p>{tempInCelsius ? temperature.toFixed(1) + ' °C' 
-          : tempInFahrenheit.toFixed(1) + ' °F'}</p>
+        <p>{tempIsCelsius ? temperature.toFixed(1) + ' °C' 
+          : fahrenheitTemp.toFixed(1) + ' °F'}</p>
       </div>
       <div className="wind">
         <p>wind: {windSpeed} m/s</p>
