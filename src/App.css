@@ -64,11 +64,11 @@ h3 {
   justify-content: center;
 }
 
-#refreshBtn {
+.refreshBtn {
   background: #ff9900;
 }
 
-.weatherData {
+.weatherDataCurrent {
   background: antiquewhite;
   margin: 50px auto;
   padding: 15px;

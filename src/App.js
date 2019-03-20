@@ -3,7 +3,6 @@ import './App.css';
 
 import apiKey from './ApiKey';
 import Weather from './Weather';
-import WeatherWeek from './WeatherWeek';
 import UnitButton from './UnitButton';
 
 class App extends Component {
@@ -119,10 +118,7 @@ class App extends Component {
             </div>
           }
           {weather &&
-            <Weather weather={weather} celsius={tempInCelsius} />
-          }
-          {weather &&
-            <WeatherWeek />
+            <Weather weather={weather} tempInCelsius={tempInCelsius} />
           }
         </section>
       </div>
