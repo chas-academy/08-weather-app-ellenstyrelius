@@ -16,20 +16,20 @@ class App extends Component {
 
   getUserLocation() {
     return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(position => {
-        if (position) {
-        resolve(position.coords);
-        } else {
-          reject(
-            this.setState({hasError: true})
-          );
-        }
-      })
-    });
+      navigator.geolocation.getCurrentPosition(position => 
+        resolve(position.coords), () => 
+        reject(
+          this.setState({
+            hasError: true,
+            isLoading: false
+          })
+        )
+      );
+    })
   }
 
-  fetchWeatherData(location) {
-    const { latitude, longitude } = location;
+  fetchWeatherData() {
+    const { latitude, longitude } = this.state.location;
     const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
     const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?units=si`;
     fetch(weatherDataUrl)
@@ -37,6 +37,7 @@ class App extends Component {
       .then(data => {
         this.setState({
           weather: data,
+          hasError: false,
           isLoading: false
         });
       })
@@ -49,12 +50,13 @@ class App extends Component {
       });
   }
 
-  async getUserLocationBasedWeather() {      
+  async getUserLocationBasedWeather() {    
       const location = await this.getUserLocation();
       this.setState({
         location: location
       });
-      this.fetchWeatherData(location);
+      // const fallbackLocation  = {latitude: 41.9028, longitude: 12.4964};
+      this.fetchWeatherData();
   }
 
   componentDidMount() {
