@@ -17,23 +17,8 @@ class App extends Component {
 
   getUserLocation() {
     return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(position => 
-        resolve(
-          this.setState({
-            location: position.coords
-            }),
-            this.fetchWeatherData(this.state.location)
-        ), () => 
-        reject(
-          this.setState({
-            hasError: true,
-            isLoading: false,
-            fallbackRome: {latitude: 41.9028, longitude: 12.4964},
-          }),
-          this.fetchWeatherData(this.state.fallbackRome)
-        )
-      );
-    })
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
   }
 
   fetchWeatherData(location) {
@@ -58,12 +43,30 @@ class App extends Component {
       });
   }
 
+  async getUserLocationWeather() {    
+    await this.getUserLocation()
+    .then(position => {
+      this.fetchWeatherData(position.coords);
+      this.setState({
+        location: position.coords
+      });
+    })
+    .catch(() => {
+      this.setState({
+        hasError: true,
+        isLoading: false,
+        fallbackRome: {latitude: 41.9028, longitude: 12.4964}
+      });
+      this.fetchWeatherData(this.state.fallbackRome);
+    })
+  }
+
   componentDidMount() {
-    this.getUserLocation();
+    this.getUserLocationWeather();
   }
 
   handleRefresh = () => {
-    this.getUserLocationWeather();
+    this.getUserLocation();
   }
 
   handleToggleUnit = () => {
