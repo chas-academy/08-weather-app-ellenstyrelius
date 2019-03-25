@@ -11,25 +11,33 @@ class App extends Component {
       location: null,
       isLoading: true,
       hasError: false,
+      fallbackRome: null,
       tempIsCelsius: true
     }
 
   getUserLocation() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(position => 
-        resolve(position.coords), () => 
+        resolve(
+          this.setState({
+            location: position.coords
+            }),
+            this.fetchWeatherData(this.state.location)
+        ), () => 
         reject(
           this.setState({
             hasError: true,
-            isLoading: false
-          })
+            isLoading: false,
+            fallbackRome: {latitude: 41.9028, longitude: 12.4964},
+          }),
+          this.fetchWeatherData(this.state.fallbackRome)
         )
       );
     })
   }
 
-  fetchWeatherData() {
-    const { latitude, longitude } = this.state.location;
+  fetchWeatherData(location) {
+    const { latitude, longitude } = location;
     const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
     const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?units=si`;
     fetch(weatherDataUrl)
@@ -50,21 +58,12 @@ class App extends Component {
       });
   }
 
-  async getUserLocationBasedWeather() {    
-      const location = await this.getUserLocation();
-      this.setState({
-        location: location
-      });
-      // const fallbackLocation  = {latitude: 41.9028, longitude: 12.4964};
-      this.fetchWeatherData();
-  }
-
   componentDidMount() {
-    this.getUserLocationBasedWeather();
+    this.getUserLocation();
   }
 
   handleRefresh = () => {
-    this.getUserLocationBasedWeather();
+    this.getUserLocationWeather();
   }
 
   handleToggleUnit = () => {
@@ -76,7 +75,7 @@ class App extends Component {
   render() {
     console.log('🐐: App -> render -> this.state', this.state)
     
-    const { location, weather, hasError, isLoading, tempIsCelsius } = this.state;
+    const { location, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
     
     return (
       <div className="App">
@@ -92,24 +91,33 @@ class App extends Component {
           }
         </section>
         <section className="geolocation">
-          {(!location && hasError) &&
+          {(!location && !isLoading) &&
             <div className="error">
-              <p>sorry, we couldn't find where you're at <span role="img" aria-label="robot face emoji">🤖</span></p>
+              <p>we couldn't find where you're at, maybe you blocked us? <span role="img" aria-label="flushed emoji">😳</span></p>
             </div>
           }
-          {(location && weather) &&
+          {(location && weather) ?
             <div className="position">
               <h2>{weather.timezone}</h2>
               <p>lat: {location.latitude} - lon: {location.longitude}</p>
             </div>
+          :
+          (fallbackRome && weather) &&
+            <div className="position">
+              <h2>{weather.timezone}</h2>
+            </div>
           }
         </section>
-        {(location && weather) &&
-          <section className="buttons">
-            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
+        {!isLoading &&
+          <section className="refresh">
             <button className="refreshBtn" onClick={this.handleRefresh}>
-              reload
+                reload
             </button>
+          </section>
+        }
+        {weather &&
+          <section className="tempUnitButton">
+            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
           </section>
         }
         <section className="weather">
