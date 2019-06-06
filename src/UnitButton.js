@@ -3,7 +3,7 @@ import React from 'react';
 function UnitButton({ handleToggleUnit, tempIsCelsius }) {
     return(
         <button className="unitBtn" onClick={handleToggleUnit}>
-          {tempIsCelsius ? 'fahrenheit' : 'celsius'}
+          {tempIsCelsius ? 'show temp in °F' : 'show temp in °C'}
         </button>
     );
 }
