@@ -4,6 +4,7 @@ import './App.css';
 import apiKey from './ApiKey';
 import Weather from './Weather';
 import UnitButton from './UnitButton';
+import Today from './Today';
 
 class App extends Component {
     state = {
@@ -66,7 +67,10 @@ class App extends Component {
   }
 
   handleRefresh = () => {
-    this.getUserLocation();
+    this.setState({
+      isLoading: true
+    });
+    setTimeout(() => this.getUserLocationWeather(), 1000)
   }
 
   handleToggleUnit = () => {
@@ -96,16 +100,17 @@ class App extends Component {
         <section className="geolocation">
           {(!location && !isLoading) &&
             <div className="error">
-              <p>we couldn't find where you're at, maybe you blocked us? <span role="img" aria-label="flushed emoji">😳</span></p>
+              <p>We couldn't find where you're at, maybe you blocked us? <span role="img" aria-label="flushed emoji">😳</span></p>
+              <p>But hey! All roads lead to...</p>
             </div>
           }
-          {(location && weather) ?
+          {(location && weather && !isLoading) ?
             <div className="position">
               <h2>{weather.timezone}</h2>
-              <p>lat: {location.latitude} - lon: {location.longitude}</p>
+              {/* <p>lat: {location.latitude} - lon: {location.longitude}</p> */}
             </div>
           :
-          (fallbackRome && weather) &&
+          (fallbackRome && weather && !isLoading) &&
             <div className="position">
               <h2>{weather.timezone}</h2>
             </div>
@@ -118,19 +123,22 @@ class App extends Component {
             </button>
           </section>
         }
-        {weather &&
+        {(weather && !isLoading) &&
           <section className="tempUnitButton">
             <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
           </section>
         }
+        {(weather && !isLoading) &&
+          <Today time={weather.currently.time}/>
+        }
         <section className="weather">
           {(!weather && hasError) && 
             <div className="error">
-              <p>sorry, we weren't able to get a weather forecast <span role="img" aria-label="robot face emoji">🤖</span></p>
-              <p>maybe try again in a couple of minutes?</p>
+              <p>Sorry, something went wrong <span role="img" aria-label="robot face emoji">🤖</span></p>
+              <p>Maybe try again in a couple of minutes?</p>
             </div>
           }
-          {weather &&
+          {(weather && !isLoading) &&
             <Weather weather={weather} tempIsCelsius={tempIsCelsius} />
           }
         </section>

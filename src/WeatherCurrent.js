@@ -1,19 +1,8 @@
 import React from 'react';
 
-function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempIsCelsius, getFahrenheitTemp }) {
-  const { summary, temperature, humidity, windSpeed, time } = currentWeather;
-  const getCurrentTime = () => {
-    const fullDate = new Date(time*1000);
-    const hours = fullDate.getHours();
-    const minutes = fullDate.getMinutes();
-    if (minutes < 10) { 
-      return hours + ':0' + minutes;
-    } else {
-      return hours + ':' + minutes;
-    }
-  }
-  const currentTime = getCurrentTime();
-  const today = weekdays[new Date(time*1000).getDay()-1] + ' ' + currentTime;
+function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
+  const { summary, temperature, humidity, windSpeed } = currentWeather;
+  
   const { sunriseTime, sunsetTime } = dailyWeather.data[0];
   const sunrise = new Date(sunriseTime*1000).toLocaleTimeString();
   const sunset = new Date(sunsetTime*1000).toLocaleTimeString();
@@ -21,7 +10,6 @@ function WeatherCurrent({ currentWeather, dailyWeather, weekdays, tempIsCelsius,
 
   return (
     <section className="weatherDataCurrent">
-      <h3>{today}</h3>
       <div className="summary">
         <p>{summary}</p>
       </div>
