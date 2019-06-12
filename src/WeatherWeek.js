@@ -8,7 +8,6 @@ import { weekdays } from './utils/weekdays';
 function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
   const weatherDataWeekArr = dailyWeather.data;
   weatherDataWeekArr.shift();
-	console.log('🐐: WeatherWeek -> weatherDataWeekArr', weatherDataWeekArr)
 
     return (
     <section className="weatherWeek">
