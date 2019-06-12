@@ -15,7 +15,7 @@ export default function Today({ time }) {
   }
   const getToday = () => {
     const currentTime = getCurrentTime();
-    const today = weekdays[new Date(time*1000).getDay()-1] + ' ' + currentTime;
+    const today = weekdays[new Date(time*1000).getDay()] + ' ' + currentTime;
     return today;
   }
 

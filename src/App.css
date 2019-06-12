@@ -1,11 +1,18 @@
 * {
-  text-align: center;
   font-family: "Helvetica Neue", Helvetca, sans-serif;
 }
 
-.App-header {
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
   background-image: linear-gradient(#679cda, #ff9900);
   color: white;
+  text-align: center;
+  width: 100%;
   padding: 30px;
   margin-bottom: 60px;
   position: relative;
@@ -53,18 +60,33 @@ h3 {
   margin-top: 40px;
   padding: 15px;
   height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .refreshBtn {
   background: #ff9900;
 }
 
+.weather {
+  width: 100%;
+}
+
 .weatherDataCurrent {
   background: antiquewhite;
+  text-align: center;
   margin-top: 40px;
   padding: 15px;
+}
+
+.weatherWeek {
+  text-align: center;
+}
+
+.weatherWeekOverview {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.weatherWeekOverview div {
+  padding: 24px;
 }

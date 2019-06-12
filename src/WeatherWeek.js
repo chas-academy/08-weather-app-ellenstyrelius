@@ -11,8 +11,9 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
 	console.log('🐐: WeatherWeek -> weatherDataWeekArr', weatherDataWeekArr)
 
     return (
-    <section className="weatherWeekOverview">
+    <section className="weatherWeek">
       <h3>the coming week:</h3>
+      <div className="weatherWeekOverview">
       {weatherDataWeekArr.map((day, index) => {
         const CelsiusLow = day.temperatureLow.toFixed();
         const CelsiusHigh = day.temperatureHigh.toFixed();
@@ -20,7 +21,7 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
         const FahrenheitHigh = getFahrenheitTemp(day.temperatureHigh).toFixed();
         return (
           <div key={index}>
-            <p>{weekdays[new Date(day.time*1000).getDay()-1]}</p>
+            <p>{weekdays[new Date(day.time*1000).getDay()]}</p>
             <p>{new Date(day.time*1000).toLocaleDateString()}</p>
             <p>{day.icon}</p>
             <p>{tempIsCelsius ? 
@@ -29,6 +30,7 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
           </div>
         )
       })}
+      </div>
     </section>
   );
 }
