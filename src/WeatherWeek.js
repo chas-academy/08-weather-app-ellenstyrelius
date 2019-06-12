@@ -3,6 +3,9 @@ import React from 'react';
 function WeatherWeek({ dailyWeather, weekdays, getFahrenheitTemp, tempIsCelsius }) {
   const weatherDataWeekArr = dailyWeather.data;
 
+  //// should display "kort översikt för veckan"
+  //// maybe just icons (and temperature?) then?
+
   ////////////////////////////////////////?????????
   weatherDataWeekArr.shift();
 	console.log('🐐: WeatherWeek -> weatherDataWeekArr', weatherDataWeekArr)

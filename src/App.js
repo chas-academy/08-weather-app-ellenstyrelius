@@ -97,6 +97,9 @@ class App extends Component {
             </div>
           }
         </section>
+        {(weather && !isLoading) &&
+          <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
+        }
         <section className="geolocation">
           {(!location && !isLoading) &&
             <div className="error">
@@ -115,22 +118,13 @@ class App extends Component {
               <h2>{weather.timezone}</h2>
             </div>
           }
-        </section>
-        {!isLoading &&
-          <section className="refresh">
-            <button className="refreshBtn" onClick={this.handleRefresh}>
-                reload
-            </button>
-          </section>
-        }
-        {(weather && !isLoading) &&
-          <section className="tempUnitButton">
-            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
-          </section>
-        }
+        </section>      
         {(weather && !isLoading) &&
           <Today time={weather.currently.time}/>
         }
+        <button className="refreshBtn" onClick={this.handleRefresh}>
+            reload
+        </button>
         <section className="weather">
           {(!weather && hasError) && 
             <div className="error">
