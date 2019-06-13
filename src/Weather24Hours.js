@@ -1,7 +1,5 @@
 import React from 'react';
 
-// should display weather every third hour current day (24 hours?)
-
 function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
 
   const everyThirdHourIndexes = [3, 6, 9, 12, 15, 18, 21, 24];
@@ -14,15 +12,27 @@ function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
   }
 
   getEveryThirdHour();
-  
-  console.log('🐐: functionWeather24Hours -> everyThirdHour', everyThirdHour)
-
-  const hour = everyThirdHour[7];
-  const time = new Date(hour.time*1000).toLocaleTimeString();
-  console.log('🐐: functionWeather24Hours -> time', time)
 
   return(
-    <div>Hey, I'm today's weather! (°-°)</div>
+    <section>
+      <h3>coming 24 hours:</h3>
+      {everyThirdHour.map((obj, index) => {
+        const celsius = obj.temperature.toFixed();
+        const fahrenheit = getFahrenheitTemp(obj.temperature).toFixed();
+        return (
+          <div key={index}>
+            <p>{new Date(obj.time*1000).toTimeString().slice(0, 5)}</p>
+            <p>{obj.icon}</p>
+            <p>{tempIsCelsius ?
+              celsius + ' °C' :
+              fahrenheit + ' °F'
+            }</p>
+            <p>wind: {obj.windSpeed} m/s</p>
+            <p>humidity: {obj.humidity}</p>
+          </div>
+        )
+      })}
+    </section>
   )
 }
 
