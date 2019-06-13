@@ -3,6 +3,7 @@ import React from 'react';
 import WeatherCurrent from './WeatherCurrent';
 import Weather24Hours from './Weather24Hours';
 import WeatherWeek from './WeatherWeek';
+import WeatherFiveDays from './WeatherFiveDays';
 
 function Weather({ weather, tempIsCelsius }) {
   const currentWeather = weather.currently;
@@ -16,15 +17,23 @@ function Weather({ weather, tempIsCelsius }) {
         currentWeather={currentWeather} 
         dailyWeather={dailyWeather} 
         tempIsCelsius={tempIsCelsius} 
-        getFahrenheitTemp={getFahrenheitTemp}/>
+        getFahrenheitTemp={getFahrenheitTemp}
+      />
       <Weather24Hours 
         hourlyWeather={hourlyWeather}
         tempIsCelsius={tempIsCelsius}
-        getFahrenheitTemp={getFahrenheitTemp}/>
+        getFahrenheitTemp={getFahrenheitTemp}
+      />
       <WeatherWeek 
         dailyWeather={dailyWeather} 
         tempIsCelsius={tempIsCelsius}
-        getFahrenheitTemp={getFahrenheitTemp}/>
+        getFahrenheitTemp={getFahrenheitTemp}
+      />
+      <WeatherFiveDays 
+        dailyWeather={dailyWeather}
+        tempIsCelsius={tempIsCelsius}
+        getFahrenheitTemp={getFahrenheitTemp}
+      />
     </section>
   );
 }
