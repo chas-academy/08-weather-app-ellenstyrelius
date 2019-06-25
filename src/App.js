@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import apiKey from './ApiKey';
+import Header from './Header';
 import Weather from './Weather';
 import UnitButton from './UnitButton';
 import Today from './Today';
@@ -86,10 +86,7 @@ class App extends Component {
     
     return (
       <div className="App">
-        <header className="header">
-          <h1>rain or shine</h1>
-          <h2>weather forecaster</h2>
-        </header>
+        <Header />
         <section className="loading">
           {(isLoading) &&
             <div className="loadingWeather">

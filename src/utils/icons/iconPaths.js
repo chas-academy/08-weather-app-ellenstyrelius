@@ -1,5 +1,3 @@
-import React from 'react';
-
 import clearday from './clearday.svg';
 import clearnight from './clearnight.svg';
 import cloudy from './cloudy.svg';

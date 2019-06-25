@@ -3,7 +3,7 @@ import React from 'react';
 import iconPaths from './utils/icons/iconPaths';
 
 function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
-  const { icon, summary, temperature, humidity, windSpeed } = currentWeather;
+  const { icon, temperature, humidity, windSpeed } = currentWeather;
   const weatherIcon = iconPaths[icon.split('-').join('')];
   const { sunriseTime, sunsetTime } = dailyWeather.data[0];
   const sunrise = new Date(sunriseTime*1000).toLocaleTimeString();
@@ -13,10 +13,7 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
   return (
     <section className="weatherDataCurrent">
       <div className="icon">
-        <img src={weatherIcon} height="100"/>
-      </div>
-      <div className="summary">
-        <p>{summary}</p>
+        <img src={weatherIcon} alt={icon} height="100"/>
       </div>
       <div className="temp">
         <p>{tempIsCelsius ? temperature.toFixed(1) + ' °C' 
