@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import colors from './utils/colors';
+
+const { orange, blue } = colors;
+
 const Background = styled.header`
-  background-image: linear-gradient(#679cda, #ff9900);
+  background-image: linear-gradient(${blue}, ${orange});
   color: white;
   text-align: center;
   width: 100%;
