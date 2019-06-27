@@ -22,8 +22,10 @@ const Container = styled.div`
   margin-bottom: 16px;
 `
 
-function Icon({ weatherIcon }) {
+function Icon({ icon }) {
   
+  const weatherIcon = icon.charAt(0).toUpperCase() + icon.slice(1).split('-').join('');
+
   return (
     <Container>
     {(weatherIcon === 'Clearday' && 
