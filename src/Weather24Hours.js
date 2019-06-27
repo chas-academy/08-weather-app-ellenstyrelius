@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Icon from './utils/Icon';
+
 function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
 
   const everyThirdHourIndexes = [3, 6, 9, 12, 15, 18, 21, 24];
@@ -22,7 +24,7 @@ function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
         return (
           <div key={index}>
             <p>{new Date(obj.time*1000).toTimeString().slice(0, 5)}</p>
-            <p>{obj.icon}</p>
+            <Icon icon={obj.icon} />
             <p>{tempIsCelsius ?
               celsius + ' °C' :
               fahrenheit + ' °F'

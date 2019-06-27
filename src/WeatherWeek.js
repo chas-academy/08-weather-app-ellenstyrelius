@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { weekdays } from './utils/weekdays';
+import Icon from './utils/Icon';
 
 function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
   const weatherDataWeekArr = dailyWeather.data.slice(1, 8);
@@ -16,7 +17,7 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
           <div key={index}>
             <p>{weekdays[new Date(day.time*1000).getDay()]}</p>
             <p>{new Date(day.time*1000).toDateString().slice(4, 10)}</p>
-            <p>{day.icon}</p>
+            <Icon icon={day.icon} />
             <p>{tempIsCelsius ? 
               celsiusHigh + ' °C' : 
               fahrenheitHigh + ' °F'}</p> 
