@@ -16,7 +16,7 @@ const Background = styled.header`
   top: 0;
 `
 const Title = styled.h1`
-  font-size: 90px;
+  font-size: 80px;
   font-weight: 100;
   margin-bottom: 24px;
 `
