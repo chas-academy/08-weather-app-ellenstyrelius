@@ -87,6 +87,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+
+
+        {/* Loader should be own component */}
         <section className="loading">
           {(isLoading) &&
             <div className="loadingWeather">
@@ -119,9 +122,13 @@ class App extends Component {
         {(weather && !isLoading) &&
           <Today time={weather.currently.time}/>
         }
+
+
+        {/* refresh button should be made into own component */}
         <button className="refreshBtn" onClick={this.handleRefresh}>
             reload
         </button>
+
         <section className="weather">
           {(!weather && hasError) && 
             <div className="error">
