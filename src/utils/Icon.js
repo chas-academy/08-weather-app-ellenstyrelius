@@ -13,18 +13,18 @@ import { ReactComponent as Sleet } from './icons/sleet.svg';
 import { ReactComponent as Snow } from './icons/snow.svg';
 import { ReactComponent as Wind } from './icons/wind.svg';
 
-const fill = 'none';
-const stroke = colors.gray1;
-const width = '80';
-
-const Container = styled.div`
-  width: ${width}px;
-  margin-bottom: 16px;
-`
-
 function Icon({ icon }) {
   
   const weatherIcon = icon.charAt(0).toUpperCase() + icon.slice(1).split('-').join('');
+  const fill = 'none';
+  const stroke = colors.gray1;
+  const width = '80';
+  /// Maybe this should be received as props too??
+
+  const Container = styled.div`
+    width: ${width}px;
+    margin-bottom: 16px;
+  `
 
   return (
     <Container>

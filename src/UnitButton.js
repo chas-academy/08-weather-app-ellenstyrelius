@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Button from './utils/Button';
+
 function UnitButton({ handleToggleUnit, tempIsCelsius }) {
     return(
-        <button className="unitBtn" onClick={handleToggleUnit}>
+        <Button className="unitBtn" onClick={handleToggleUnit}>
           {tempIsCelsius ? 'show temp in °F' : 'show temp in °C'}
-        </button>
+        </Button>
     );
 }
 
