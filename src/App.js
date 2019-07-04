@@ -4,7 +4,6 @@ import apiKey from './ApiKey';
 import Header from './Header';
 import Weather from './Weather';
 import Today from './Today';
-import UnitButton from './UnitButton';
 import ReloadButton from './ReloadButton';
 
 class App extends Component {
@@ -128,10 +127,7 @@ class App extends Component {
             </div>
           }
           {(weather && !isLoading) &&
-            <>
-            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
-            <Weather weather={weather} tempIsCelsius={tempIsCelsius} />
-            </>
+            <Weather weather={weather} tempIsCelsius={tempIsCelsius} handleToggleUnit={this.handleToggleUnit} />
           }
         </section>
       </div>
