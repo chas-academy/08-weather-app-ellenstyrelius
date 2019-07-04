@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import apiKey from './ApiKey';
 import Header from './Header';
 import Weather from './Weather';
-import UnitButton from './UnitButton';
 import Today from './Today';
+import UnitButton from './UnitButton';
+import ReloadButton from './ReloadButton';
 
 class App extends Component {
     state = {
@@ -97,9 +98,6 @@ class App extends Component {
             </div>
           }
         </section>
-        {(weather && !isLoading) &&
-          <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
-        }
         <section className="geolocation">
           {(!location && !isLoading) &&
             <div className="error">
@@ -110,7 +108,6 @@ class App extends Component {
           {(location && weather && !isLoading) ?
             <div className="position">
               <h2>{weather.timezone}</h2>
-              {/* <p>lat: {location.latitude} - lon: {location.longitude}</p> */}
             </div>
           :
           (fallbackRome && weather && !isLoading) &&
@@ -122,13 +119,7 @@ class App extends Component {
         {(weather && !isLoading) &&
           <Today time={weather.currently.time}/>
         }
-
-
-        {/* refresh button should be made into own component */}
-        <button className="refreshBtn" onClick={this.handleRefresh}>
-            reload
-        </button>
-
+        <ReloadButton handleRefresh={this.handleRefresh} />
         <section className="weather">
           {(!weather && hasError) && 
             <div className="error">
@@ -137,7 +128,10 @@ class App extends Component {
             </div>
           }
           {(weather && !isLoading) &&
+            <>
+            <UnitButton handleToggleUnit={this.handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
             <Weather weather={weather} tempIsCelsius={tempIsCelsius} />
+            </>
           }
         </section>
       </div>

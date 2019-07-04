@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import colors from './colors';
 
 const Button = styled.button`
-  background: ${colors.gray5};
+  background: ${colors.offWhite};
   color: ${colors.offBlack};
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 4px 8px;
-  border: none;
+  border: 2px solid ${colors.offBlack};
   border-radius: 8px;
-  box-shadow: 0px 2px 2px ${colors.gray4};
+  box-shadow: 0px 1px 2px ${colors.gray3};
+  outline: none;
   font-size: 14px;
 
   &:hover {

@@ -11,7 +11,6 @@ const Background = styled.header`
   text-align: center;
   width: 100%;
   padding: 80px 0;
-  margin-bottom: 60px;
   position: relative;
   top: 0;
 `

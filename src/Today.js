@@ -2,7 +2,7 @@ import React from 'react';
 
 import { weekdays } from './utils/weekdays';
 
-export default function Today({ time }) {
+function Today({ time }) {
   const getCurrentTime = () => {
     const fullDate = new Date(time*1000);
     const hours = fullDate.getHours();
@@ -23,3 +23,5 @@ export default function Today({ time }) {
     <h3>{getToday()}</h3>
   )
 }
+
+export default Today;
