@@ -7,12 +7,12 @@ import colors from './utils/colors';
 const Btn = styled(Button)`
   background: ${colors.offWhite};
   color: ${colors.blue};
-  margin-top: 16px;
-  border: 2px solid ${colors.blue};
+  margin-top: 40px;
+  border: 2px solid ${colors.blueLight};
   font-size: 16px;
 
   &:hover{
-    background: ${colors.blue};
+    background: ${colors.blueLight};
     color: ${colors.offWhite};
   }
 `

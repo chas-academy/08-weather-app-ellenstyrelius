@@ -13,50 +13,55 @@ import { ReactComponent as Sleet } from './icons/sleet.svg';
 import { ReactComponent as Snow } from './icons/snow.svg';
 import { ReactComponent as Wind } from './icons/wind.svg';
 
-function Icon({ icon }) {
+function Icon({ icon, fill, stroke, width }) {
   
   const weatherIcon = icon.charAt(0).toUpperCase() + icon.slice(1).split('-').join('');
-  const fill = 'none';
-  const stroke = colors.gray1;
-  const width = '80';
-  /// Maybe this should be received as props too??
+
+  let fillProp = null;
+  let strokeProp = null;
+  let widthProp = null;
+
+  // css properties for icons with default values if props are not received from parent component:
+  fill ? fillProp = fill : fillProp = 'none';
+  stroke ? strokeProp = stroke : strokeProp = colors.gray1;
+  width ? widthProp = width : widthProp = '80';
 
   const Container = styled.div`
-    width: ${width}px;
+    width: ${widthProp}px;
     margin-bottom: 16px;
   `
 
   return (
     <Container>
     {(weatherIcon === 'Clearday' && 
-      <Clearday fill={fill} stroke={stroke} width={width} />)
+      <Clearday fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Clearnight' && 
-      <Clearnight fill={fill} stroke={stroke} height='56' />)
+      <Clearnight fill={fillProp} stroke={strokeProp} height='56' Prop/>)
     }
     {(weatherIcon === 'Cloudy' && 
-      <Cloudy fill={fill} stroke={stroke} width={width} />)
+      <Cloudy fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Fog' && 
-      <Fog fill={fill} stroke={stroke} width={width} />)
+      <Fog fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Partlycloudyday' &&
-      <Partlycloudyday fill={fill} stroke={stroke} width={width} />)
+      <Partlycloudyday fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Partlycloudynight' && 
-      <Partlycloudynight fill={fill} stroke={stroke} width={width} />)
+      <Partlycloudynight fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Rain' && 
-      <Rain fill={fill} stroke={stroke} width={width} />)
+      <Rain fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Sleet' && 
-      <Sleet fill={fill} stroke={stroke} width={width} />)
+      <Sleet fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Snow' && 
-      <Snow fill={fill} stroke={stroke} width={width} />)
+      <Snow fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     {(weatherIcon === 'Wind' && 
-      <Wind fill={fill} stroke={stroke} width={width} />)
+      <Wind fill={fillProp} stroke={strokeProp} width={widthProp} />)
     }
     </Container>
   )

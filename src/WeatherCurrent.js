@@ -7,7 +7,7 @@ import Icon from './utils/Icon';
 
 const WeatherContainer = styled.section`
   width: 320px;
-  margin: 40px auto 0;
+  margin: 64px auto 0;
   padding: 16px;
   border-bottom: 2px solid ${colors.blue};
   text-align: center;
@@ -19,7 +19,8 @@ const TextContainer = styled.div`
   margin: 0 auto;
 `
 const Temp = styled.p`
-  font-size: 24px;
+  color: ${colors.gray1};
+  font-size: 32px;
 `
 
 function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
@@ -33,7 +34,7 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
     <WeatherContainer>
       <h3>weather right now:</h3>
       <IconContainer>
-        <Icon icon={icon} />
+        <Icon icon={icon} fill="none" stroke={colors.blue} width={100}/>
       </IconContainer>
       <TextContainer>
         <Temp>

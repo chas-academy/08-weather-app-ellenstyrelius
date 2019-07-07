@@ -72,7 +72,3 @@ p {
   justify-content: center;
   flex-wrap: wrap;
 }
-
-.weatherWeekOverview div {
-  padding: 24px;
-}
