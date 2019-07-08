@@ -13,7 +13,7 @@ function Weather({ weather, tempIsCelsius, handleToggleUnit }) {
   const getFahrenheitTemp = (celsiusTemp) => celsiusTemp * 9 / 5 + 32;
 
   return (
-    <section>
+    <>
       <WeatherCurrent 
         currentWeather={currentWeather} 
         dailyWeather={dailyWeather} 
@@ -36,7 +36,7 @@ function Weather({ weather, tempIsCelsius, handleToggleUnit }) {
         tempIsCelsius={tempIsCelsius}
         getFahrenheitTemp={getFahrenheitTemp}
       />
-    </section>
+    </>
   );
 }
 

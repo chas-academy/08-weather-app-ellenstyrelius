@@ -28,7 +28,10 @@ function Icon({ icon, fill, stroke, width }) {
 
   const Container = styled.div`
     width: ${widthProp}px;
-    margin-bottom: 16px;
+    height: ${widthProp}px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
   `
 
   return (

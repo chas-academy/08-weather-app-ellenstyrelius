@@ -2,17 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import colors from './utils/colors';
-import FlexCenter from './utils/FlexCenter';
+import FlexCenterRow from './utils/FlexCenterRow';
 import Icon from './utils/Icon';
 
 const WeatherContainer = styled.section`
   width: 320px;
   margin: 64px auto 0;
-  padding: 16px;
+  padding: 24px;
   border-bottom: 2px solid ${colors.blue};
   text-align: center;
 `
-const IconContainer = styled(FlexCenter)`
+const IconContainer = styled(FlexCenterRow)`
   margin-top: 24px;
 `
 const TextContainer = styled.div`
@@ -21,6 +21,12 @@ const TextContainer = styled.div`
 const Temp = styled.p`
   color: ${colors.gray1};
   font-size: 32px;
+  font-weight: 400;
+`
+const Text = styled.p`
+  margin-top: 8px;
+  color: ${colors.gray1};
+  font-size: 18px;
 `
 
 function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
@@ -34,17 +40,18 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
     <WeatherContainer>
       <h3>weather right now:</h3>
       <IconContainer>
-        <Icon icon={icon} fill="none" stroke={colors.blue} width={100}/>
+        <Icon icon={icon} stroke={colors.gray1} width={100}/>
       </IconContainer>
       <TextContainer>
         <Temp>
           {tempIsCelsius ? temperature.toFixed(1) + ' °C' 
           : fahrenheitTemp.toFixed(1) + ' °F'}
         </Temp>
-        <p>wind: {windSpeed} m/s</p>
-        <p>humidity: {humidity}</p>
-        <p>sunrise at {sunrise}</p>
-        <p>sunset at {sunset}</p>
+        <Text>wind: {windSpeed} m/s</Text>
+        <Text>humidity: {humidity}</Text>
+        <Text>-</Text>
+        <Text>sunrise at {sunrise}</Text>
+        <Text>sunset at {sunset}</Text>
       </TextContainer>
     </WeatherContainer>
   );
