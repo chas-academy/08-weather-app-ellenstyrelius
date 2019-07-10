@@ -11,12 +11,10 @@ const Container = styled.section`
   margin: 64px auto 0;
   text-align: center;
 `
-const WeatherContainer = styled(FlexCenterRow)`
-  margin-top: 32px;
-`
-const Item = styled(FlexCenterColumn)`
+const WeatherItem = styled(FlexCenterColumn)`
+  width: 160px;
   margin: 24px 2px 0;
-  padding: 8px 24px;
+  padding: 8px 0px;
   border-left: 1px solid ${colors.gray4};
   border-right 1px solid ${colors.gray4};
 `
@@ -25,12 +23,12 @@ const Time = styled.p`
   font-weight: 300;
 `
 const Temp = styled.p`
+  margin-top: 8px;
   color: ${colors.gray1};
-  font-size: 32px;
+  font-size: 24px;
 `
 
 function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
-
   const everyThirdHourIndexes = [3, 6, 9, 12, 15, 18, 21, 24];
   const everyThirdHour= [];
 
@@ -45,24 +43,24 @@ function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
   return(
     <Container>
       <h3>next 24 hours:</h3>
-      <WeatherContainer>
+      <FlexCenterRow>
         {everyThirdHour.map((obj, index) => {
           const celsius = obj.temperature.toFixed();
           const fahrenheit = getFahrenheitTemp(obj.temperature).toFixed();
           return (
-            <Item key={index}>
+            <WeatherItem key={index}>
               <Time>{new Date(obj.time*1000).toTimeString().slice(0, 5)}</Time>
-              <Icon icon={obj.icon} />
+              <Icon icon={obj.icon} width='60' marginTop='8'/>
               <Temp>{tempIsCelsius ?
                 celsius + ' °C' :
                 fahrenheit + ' °F'
               }</Temp>
               <p>wind: {obj.windSpeed} m/s</p>
               <p>humidity: {obj.humidity}</p>
-            </Item>
+            </WeatherItem>
           )
         })}
-      </WeatherContainer>
+      </FlexCenterRow>
     </Container>
   )
 }
