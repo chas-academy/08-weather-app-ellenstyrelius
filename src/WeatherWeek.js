@@ -10,8 +10,8 @@ import FlexCenterColumn from './utils/FlexCenterColumn';
 const Container = styled.section`
   background: ${colors.yellowLight};
   width: 100%;
-  margin: 64px auto 0;
-  padding: 24px;
+  margin: 56px auto 0;
+  padding: 32px 8px;
   text-align: center;
 `
 const WeatherItem = styled(FlexCenterColumn)`
@@ -25,6 +25,7 @@ const Text = styled.p`
   font-weight: 300;
 `
 const Temp = styled.p`
+  margin-top: 8px;
   color: ${colors.gray1};
   font-size: 24px;
 `
@@ -43,7 +44,7 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
           <WeatherItem key={index}>
             <Text>{weekdays[new Date(day.time*1000).getDay()]}</Text>
             <Text>{new Date(day.time*1000).toDateString().slice(4, 10)}</Text>
-            <Icon icon={day.icon} marginTop='8'/>
+            <Icon icon={day.icon} width='64' marginTop='8'/>
             <Temp>{tempIsCelsius ? 
               celsiusHigh + ' °C' : 
               fahrenheitHigh + ' °F'}</Temp> 

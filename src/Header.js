@@ -8,16 +8,16 @@ const { orange, blue } = colors;
 const Background = styled.header`
   background-image: linear-gradient(${blue}, ${orange});
   color: white;
-  text-align: center;
   width: 100%;
-  padding: 80px 0;
+  padding: 64px 8px;
   position: relative;
   top: 0;
+  text-align: center;
 `
 const Title = styled.h1`
   font-size: 80px;
   font-weight: 100;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 `
 
 function Header() {

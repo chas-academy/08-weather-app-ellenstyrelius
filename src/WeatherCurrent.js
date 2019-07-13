@@ -5,12 +5,16 @@ import colors from './utils/colors';
 import FlexCenterColumn from './utils/FlexCenterColumn';
 import Icon from './utils/Icon';
 
-const WeatherContainer = styled(FlexCenterColumn)`
+const Container = styled(FlexCenterColumn)`
   width: 320px;
-  margin: 64px auto 0;
+  margin: 8px auto 0;
   padding: 24px;
-  border-bottom: 2px solid ${colors.blue};
+  border-bottom: 2px solid ${colors.gray3};
   text-align: center;
+`
+const Heading = styled.p`
+  font-size: 32px;
+  font-weight: 200;
 `
 const TextContainer = styled.div`
   margin: 0 auto;
@@ -24,7 +28,6 @@ const Temp = styled.p`
 const Text = styled.p`
   margin-top: 8px;
   color: ${colors.gray1};
-  font-size: 18px;
 `
 
 function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
@@ -35,8 +38,8 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
   const fahrenheitTemp = getFahrenheitTemp(temperature);
 
   return (
-    <WeatherContainer>
-      <h3>weather right now:</h3>
+    <Container>
+      {/* <Heading>weather right now:</Heading> */}
         <Icon icon={icon} stroke={colors.gray1} width={100} marginTop='24'/>
       <TextContainer>
         <Temp>
@@ -49,7 +52,7 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
         <Text><i>sunrise {sunrise}</i></Text>
         <Text><i>sunset {sunset}</i></Text>
       </TextContainer>
-    </WeatherContainer>
+    </Container>
   );
 }
 

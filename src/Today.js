@@ -1,6 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 
+import colors from './utils/colors';
 import { weekdays } from './utils/weekdays';
+
+const Text = styled.p`
+  color: ${colors.gray1};
+  font-size: 32px;
+  font-weight: 200;
+`
 
 function Today({ time }) {
   const getCurrentTime = () => {
@@ -20,7 +28,7 @@ function Today({ time }) {
   }
 
   return (
-    <h3>{getToday()}</h3>
+    <Text>{getToday()}</Text>
   )
 }
 

@@ -7,7 +7,7 @@ import colors from './utils/colors';
 const Btn = styled(Button)`
   background: ${colors.offWhite};
   color: ${colors.blue};
-  margin-top: 40px;
+  margin-top: 24px;
   border: 2px solid ${colors.blueLight};
   font-size: 16px;
 
@@ -19,7 +19,7 @@ const Btn = styled(Button)`
 
 function ReloadButton({ handleRefresh }) {
   return(
-    <Btn onClick={handleRefresh}>
+    <Btn onClick={handleRefresh} title='Reload to get an updated forecast'>
       reload
     </Btn>
   )

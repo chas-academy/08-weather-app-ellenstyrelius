@@ -119,7 +119,7 @@ class App extends Component {
           <Today time={weather.currently.time}/>
         }
         <ReloadButton handleRefresh={this.handleRefresh} />
-        <section className="weather">
+        <>
           {(!weather && hasError) && 
             <div className="error">
               <p>Sorry, something went wrong <span role="img" aria-label="robot face emoji">🤖</span></p>
@@ -129,7 +129,7 @@ class App extends Component {
           {(weather && !isLoading) &&
             <Weather weather={weather} tempIsCelsius={tempIsCelsius} handleToggleUnit={this.handleToggleUnit} />
           }
-        </section>
+        </>
       </div>
     );
   }

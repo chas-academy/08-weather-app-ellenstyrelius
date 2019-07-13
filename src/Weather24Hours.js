@@ -7,8 +7,10 @@ import FlexCenterRow from './utils/FlexCenterRow';
 import FlexCenterColumn from './utils/FlexCenterColumn';
 
 const Container = styled.section`
-  width: 90%;
+  background: ${colors.gray5};
+  width: 100%;
   margin: 64px auto 0;
+  padding: 32px 8px;
   text-align: center;
 `
 const WeatherItem = styled(FlexCenterColumn)`
@@ -20,12 +22,15 @@ const WeatherItem = styled(FlexCenterColumn)`
 `
 const Time = styled.p`
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 200;
 `
 const Temp = styled.p`
   margin-top: 8px;
   color: ${colors.gray1};
   font-size: 24px;
+`
+const Text = styled.p`
+  margin-top: 4px;
 `
 
 function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
@@ -50,13 +55,13 @@ function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
           return (
             <WeatherItem key={index}>
               <Time>{new Date(obj.time*1000).toTimeString().slice(0, 5)}</Time>
-              <Icon icon={obj.icon} width='60' marginTop='8'/>
+              <Icon icon={obj.icon} width='56' marginTop='8'/>
               <Temp>{tempIsCelsius ?
                 celsius + ' °C' :
                 fahrenheit + ' °F'
               }</Temp>
-              <p>wind: {obj.windSpeed} m/s</p>
-              <p>humidity: {obj.humidity}</p>
+              <Text>wind: {obj.windSpeed} m/s</Text>
+              <Text>humidity: {obj.humidity}</Text>
             </WeatherItem>
           )
         })}
