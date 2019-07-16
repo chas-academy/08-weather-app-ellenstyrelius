@@ -1,39 +1,50 @@
 import React, { Component } from 'react';
 
-import apiKey from './ApiKey';
+import { apiKeyDarkSky, apiKeyBing, proxyUrl } from './Api';
 import Header from './Header';
 import Weather from './Weather';
 import Today from './Today';
 import ReloadButton from './ReloadButton';
 
 class App extends Component {
-    state = {
-      weather: null,
-      location: null,
-      isLoading: true,
-      hasError: false,
-      fallbackRome: null,
-      tempIsCelsius: true
-    }
-
-  getUserLocation() {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
+  state = {
+    weather: null,
+    currentPosition: null,
+    currentAddress: null,
+    isLoading: true,
+    hasError: false,
+    fallbackRome: null,
+    tempIsCelsius: true
   }
 
-  fetchWeatherData(location) {
-    const { latitude, longitude } = location;
-    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-    const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?units=si`;
+  fetchUserAddress(currentPosition) {
+    const { latitude, longitude } = currentPosition;
+    const placeDataUrl = `${proxyUrl}http://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKeyBing}`;
+    fetch(placeDataUrl)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          currentAddress: data.resourceSets[0].resources[0].address
+        })
+        if (this.state.weather) {
+          this.setState({isLoading: false});
+        }
+      })
+  }
+
+  fetchWeatherData(currentPosition) {
+    const { latitude, longitude } = currentPosition;
+    const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKeyDarkSky}/${latitude},${longitude}?units=si`;
     fetch(weatherDataUrl)
       .then(res => res.json())
       .then(data => {
         this.setState({
           weather: data,
           hasError: false,
-          isLoading: false
         });
+        if (this.state.currentAddress) {
+          this.setState({isLoading: false});
+        }
       })
       .catch(error => {
         this.setState({
@@ -44,33 +55,40 @@ class App extends Component {
       });
   }
 
-  async getUserLocationWeather() {    
+  getUserLocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+
+  async getUserData() {    
     await this.getUserLocation()
-    .then(position => {
-      this.fetchWeatherData(position.coords);
-      this.setState({
-        location: position.coords
-      });
-    })
-    .catch(() => {
-      this.setState({
-        hasError: true,
-        isLoading: false,
-        fallbackRome: {latitude: 41.9028, longitude: 12.4964}
-      });
-      this.fetchWeatherData(this.state.fallbackRome);
-    })
+      .then(position => {
+        this.fetchUserAddress(position.coords);
+        this.fetchWeatherData(position.coords);
+        this.setState({
+          currentPosition: position.coords
+        });
+      })
+      .catch(() => {
+        this.setState({
+          hasError: true,
+          fallbackRome: {latitude: 41.9028, longitude: 12.4964}
+        });
+        this.fetchUserAddress(this.state.fallbackRome);
+        this.fetchWeatherData(this.state.fallbackRome);
+      })
   }
 
   componentDidMount() {
-    this.getUserLocationWeather();
+    this.getUserData();
   }
 
   handleRefresh = () => {
     this.setState({
       isLoading: true
     });
-    setTimeout(() => this.getUserLocationWeather(), 1000)
+    setTimeout(() => this.getUserData(), 1000);
   }
 
   handleToggleUnit = () => {
@@ -82,7 +100,7 @@ class App extends Component {
   render() {
     console.log('🐐: App -> render -> this.state', this.state)
     
-    const { location, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
+    const { currentPosition, currentAddress, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
     
     return (
       <div className="App">
@@ -98,20 +116,20 @@ class App extends Component {
           }
         </section>
         <section className="geolocation">
-          {(!location && !isLoading) &&
+          {(!currentPosition && !isLoading) &&
             <div className="error">
               <p>We couldn't find where you're at, maybe you blocked us? <span role="img" aria-label="flushed emoji">😳</span></p>
               <p>But hey! All roads lead to...</p>
             </div>
           }
-          {(location && weather && !isLoading) ?
+          {(currentAddress && weather && !isLoading) ?
             <div className="position">
-              <h2>{weather.timezone}</h2>
+              <h2>{currentAddress.locality}, {currentAddress.countryRegion}</h2>
             </div>
           :
           (fallbackRome && weather && !isLoading) &&
             <div className="position">
-              <h2>{weather.timezone}</h2>
+              <h2>{currentAddress.locality}, {currentAddress.countryRegion}</h2>
             </div>
           }
         </section>      
@@ -120,7 +138,7 @@ class App extends Component {
         }
         <ReloadButton handleRefresh={this.handleRefresh} />
         <>
-          {(!weather && hasError) && 
+          {(!weather && hasError && !fallbackRome) && 
             <div className="error">
               <p>Sorry, something went wrong <span role="img" aria-label="robot face emoji">🤖</span></p>
               <p>Maybe try again in a couple of minutes?</p>
