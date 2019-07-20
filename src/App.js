@@ -5,6 +5,7 @@ import Header from './Header';
 import Weather from './Weather';
 import Today from './Today';
 import ReloadButton from './ReloadButton';
+import Footer from './Footer';
 
 class App extends Component {
   state = {
@@ -148,6 +149,7 @@ class App extends Component {
             <Weather weather={weather} tempIsCelsius={tempIsCelsius} handleToggleUnit={this.handleToggleUnit} />
           }
         </>
+        <Footer />
       </div>
     );
   }
