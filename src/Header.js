@@ -3,28 +3,32 @@ import styled from 'styled-components';
 
 import colors from './utils/colors';
 
-const { orange, blue } = colors;
-
 const Background = styled.header`
-  background-image: linear-gradient(${blue}, ${orange});
-  color: white;
+  background: ${colors.gray5};
   width: 100%;
   padding: 64px 8px;
+  border-bottom: 2px solid ${colors.gray3};
   position: relative;
   top: 0;
   text-align: center;
 `
 const Title = styled.h1`
-  font-size: 80px;
+  color: ${colors.gray1};
+  font-size: 56px;
   font-weight: 100;
-  margin-bottom: 16px;
+`
+const SecondHeader = styled.h2`
+  color: ${colors.gray2};
+  margin-top: 16px;
+  font-size: 32px;
+  font-weight: 200;
 `
 
 function Header() {
   return (
     <Background>
       <Title>rain or shine</Title>
-      <h2>weather forecaster</h2>
+      <SecondHeader>weather forecaster</SecondHeader>
     </Background>
   )
 }
