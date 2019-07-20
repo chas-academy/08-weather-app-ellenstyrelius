@@ -10,36 +10,25 @@ import UnitButton from './UnitButton';
 const Container = styled.section`
   width: 100%;
 `
+export const getFahrenheitTemp = (celsiusTemp) => celsiusTemp * 9 / 5 + 32;
 
 function Weather({ weather, tempIsCelsius, handleToggleUnit }) {
-  const currentWeather = weather.currently;
-  const dailyWeather = weather.daily;
-  const hourlyWeather = weather.hourly;
-  const getFahrenheitTemp = (celsiusTemp) => celsiusTemp * 9 / 5 + 32;
+  const {currently: currentWeather, daily: dailyWeather, hourly: hourlyWeather} = weather;
 
   return (
     <Container>
-      <WeatherCurrent 
-        currentWeather={currentWeather} 
-        dailyWeather={dailyWeather} 
-        tempIsCelsius={tempIsCelsius} 
-        getFahrenheitTemp={getFahrenheitTemp}
+      <WeatherCurrent
+        {...{currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
       <UnitButton handleToggleUnit={handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
       <WeatherWeek 
-        dailyWeather={dailyWeather} 
-        tempIsCelsius={tempIsCelsius}
-        getFahrenheitTemp={getFahrenheitTemp}
+        {...{dailyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
       <Weather24Hours 
-        hourlyWeather={hourlyWeather}
-        tempIsCelsius={tempIsCelsius}
-        getFahrenheitTemp={getFahrenheitTemp}
+        {...{hourlyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
       <WeatherFiveDays 
-        dailyWeather={dailyWeather}
-        tempIsCelsius={tempIsCelsius}
-        getFahrenheitTemp={getFahrenheitTemp}
+        {...{dailyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
     </Container>
   );
