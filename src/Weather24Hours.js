@@ -7,7 +7,6 @@ import FlexCenterRow from './utils/FlexCenterRow';
 import FlexCenterColumn from './utils/FlexCenterColumn';
 
 const Container = styled.section`
-  background: ${colors.gray5};
   width: 100%;
   margin: 64px auto 0;
   padding: 32px 8px;
@@ -25,11 +24,12 @@ const Time = styled.p`
   font-weight: 200;
 `
 const Temp = styled.p`
+  color: ${colors.gray2};
   margin-top: 8px;
-  color: ${colors.gray1};
   font-size: 24px;
 `
 const Text = styled.p`
+  color: ${colors.gray1};
   margin-top: 4px;
 `
 
@@ -55,7 +55,7 @@ function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
           return (
             <WeatherItem key={index}>
               <Time>{new Date(obj.time*1000).toTimeString().slice(0, 5)}</Time>
-              <Icon icon={obj.icon} width='56' marginTop='8'/>
+              <Icon icon={obj.icon} height='48' marginTop='8' stroke={colors.gray2}/>
               <Temp>{tempIsCelsius ?
                 celsius + ' °C' :
                 fahrenheit + ' °F'

@@ -8,7 +8,7 @@ import FlexCenterRow from './utils/FlexCenterRow';
 import FlexCenterColumn from './utils/FlexCenterColumn';
 
 const Container = styled.section`
-  background: ${colors.yellowLight};
+  
   width: 100%;
   margin: 56px auto 0;
   padding: 32px 8px;
@@ -36,21 +36,21 @@ function WeatherWeek({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
     return (
     <Container>
       <h3>coming week:</h3>
-      <FlexCenterRow>
-      {weatherDataWeekArr.map((day, index) => {
-        const celsiusHigh = day.temperatureHigh.toFixed();
-        const fahrenheitHigh = getFahrenheitTemp(day.temperatureHigh).toFixed();
-        return (
-          <WeatherItem key={index}>
-            <Text>{weekdays[new Date(day.time*1000).getDay()]}</Text>
-            <Text>{new Date(day.time*1000).toDateString().slice(4, 10)}</Text>
-            <Icon icon={day.icon} width='64' marginTop='8'/>
-            <Temp>{tempIsCelsius ? 
-              celsiusHigh + ' °C' : 
-              fahrenheitHigh + ' °F'}</Temp> 
-          </WeatherItem>
-        )
-      })}
+        <FlexCenterRow>
+        {weatherDataWeekArr.map((day, index) => {
+          const celsiusHigh = day.temperatureHigh.toFixed();
+          const fahrenheitHigh = getFahrenheitTemp(day.temperatureHigh).toFixed();
+          return (
+            <WeatherItem key={index}>
+              <Text>{weekdays[new Date(day.time*1000).getDay()]}</Text>
+              <Text>{new Date(day.time*1000).toDateString().slice(4, 10)}</Text>
+              <Icon icon={day.icon} height='56' marginTop='8'/>
+              <Temp>{tempIsCelsius ? 
+                celsiusHigh + ' °C' : 
+                fahrenheitHigh + ' °F'}</Temp> 
+            </WeatherItem>
+          )
+        })}
       </FlexCenterRow>
     </Container>
   );

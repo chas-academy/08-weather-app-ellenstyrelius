@@ -13,56 +13,56 @@ import { ReactComponent as Sleet } from './icons/sleet.svg';
 import { ReactComponent as Snow } from './icons/snow.svg';
 import { ReactComponent as Wind } from './icons/wind.svg';
 
-function Icon({ icon, stroke, width, marginTop }) {
+function Icon({ icon, stroke, height, marginTop }) {
   
   const weatherIcon = icon.charAt(0).toUpperCase() + icon.slice(1).split('-').join('');
 
   let strokeProp = null;
-  let widthProp = null;
+  let heightProp = null;
 
   // css properties for icons with default values if props are not received from parent component:
   stroke ? strokeProp = stroke : strokeProp = colors.gray1;
-  width ? widthProp = width : widthProp = '80';
+  height ? heightProp = height : heightProp = '56';
 
   const Container = styled.div`
-    width: ${widthProp}px;
-    height: ${widthProp}px;
+    height: ${heightProp}px;
     margin-top: ${marginTop}px;
     display: flex;
     align-items: center;
+    justify-items: center;
   `
 
   return (
     <Container>
     {(weatherIcon === 'Clearday' && 
-      <Clearday fill='none' stroke={strokeProp} width={widthProp} />)
+      <Clearday fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Clearnight' && 
-      <Clearnight fill='none' stroke={strokeProp} height='56' Prop/>)
+      <Clearnight fill='none' stroke={strokeProp} height={heightProp}/>)
     }
     {(weatherIcon === 'Cloudy' && 
-      <Cloudy fill='none' stroke={strokeProp} width={widthProp} />)
+      <Cloudy fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Fog' && 
-      <Fog fill='none' stroke={strokeProp} width={widthProp} />)
+      <Fog fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Partlycloudyday' &&
-      <Partlycloudyday fill='none' stroke={strokeProp} width={widthProp} />)
+      <Partlycloudyday fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Partlycloudynight' && 
-      <Partlycloudynight fill='none' stroke={strokeProp} width={widthProp} />)
+      <Partlycloudynight fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Rain' && 
-      <Rain fill='none' stroke={strokeProp} width={widthProp} />)
+      <Rain fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Sleet' && 
-      <Sleet fill='none' stroke={strokeProp} width={widthProp} />)
+      <Sleet fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Snow' && 
-      <Snow fill='none' stroke={strokeProp} width={widthProp} />)
+      <Snow fill='none' stroke={strokeProp} height={heightProp} />)
     }
     {(weatherIcon === 'Wind' && 
-      <Wind fill='none' stroke={strokeProp} width={widthProp} />)
+      <Wind fill='none' stroke={strokeProp} height={heightProp} />)
     }
     </Container>
   )

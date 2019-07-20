@@ -12,10 +12,6 @@ const Container = styled(FlexCenterColumn)`
   border-bottom: 2px solid ${colors.gray3};
   text-align: center;
 `
-const Heading = styled.p`
-  font-size: 32px;
-  font-weight: 200;
-`
 const TextContainer = styled.div`
   margin: 0 auto;
 `
@@ -39,8 +35,7 @@ function WeatherCurrent({ currentWeather, dailyWeather, tempIsCelsius, getFahren
 
   return (
     <Container>
-      {/* <Heading>weather right now:</Heading> */}
-        <Icon icon={icon} stroke={colors.gray1} width={100} marginTop='24'/>
+      <Icon icon={icon} stroke={colors.gray1} height={100} marginTop='24'/>
       <TextContainer>
         <Temp>
           {tempIsCelsius ? temperature.toFixed() + ' °C' 
