@@ -28,31 +28,3 @@ h3 {
 p {
   font-size: 16px;
 }
-
-.loadingWeather:after {
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: bottom;
-  -webkit-animation: ellipsis steps(4, end) 900ms infinite;
-  animation: ellipsis steps(4, end) 900ms infinite;
-  content: "\2026";
-  width: 0px;
-  margin: 0 auto;
-}
-
-@keyframes ellipsis {
-  to {
-    width: 1.25em;
-  }
-}
-
-@-webkit-keyframes ellipsis {
-  to {
-    width: 1.25em;
-  }
-}
-
-.position {
-  margin-top: 48px;
-  padding: 16px;
-}

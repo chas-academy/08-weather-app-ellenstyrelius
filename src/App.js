@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { apiKeyDarkSky, apiKeyBing, proxyUrl } from './Api';
 import Header from './Header';
 import Loader from './Loader';
-import Weather from './Weather';
+import GeoLocation from './GeoLocation';
 import Today from './Today';
+import Weather from './Weather';
 import ReloadButton from './ReloadButton';
 import Footer from './Footer';
 
@@ -27,7 +28,7 @@ class App extends Component {
       .then(data => {
         this.setState({
           currentAddress: data.resourceSets[0].resources[0].address
-        })
+        });
         if (this.state.weather) {
           this.setState({isLoading: false});
         }
@@ -88,7 +89,8 @@ class App extends Component {
 
   handleRefresh = () => {
     this.setState({
-      isLoading: true
+      isLoading: true,
+      fallbackRome: null
     });
     setTimeout(() => this.getUserData(), 1000);
   }
@@ -107,29 +109,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-          {(isLoading) &&
-            <Loader />
-          }
-        <section className="geolocation">
-          {(!currentPosition && !isLoading) &&
-            <div className="error">
-              <p>We couldn't find where you're at, maybe you blocked us? <span role="img" aria-label="flushed emoji">😳</span></p>
-              <p>But hey! All roads lead to...</p>
-            </div>
-          }
-          {(currentAddress && weather && !isLoading) ?
-            <div className="position">
-              <h2>{currentAddress.locality}, {currentAddress.countryRegion}</h2>
-            </div>
-          :
-          (fallbackRome && weather && !isLoading) &&
-            <div className="position">
-              <h2>{currentAddress.locality}, {currentAddress.countryRegion}</h2>
-            </div>
-          }
-        </section>      
-        {(weather && !isLoading) &&
-          <Today time={weather.currently.time}/>
+        {isLoading &&
+          <Loader />
+        }
+        {(currentAddress && weather && !isLoading) &&
+          <>
+            <GeoLocation {...{currentAddress, fallbackRome, weather, isLoading}}/>
+            <Today time={weather.currently.time}/>
+          </>
         }
         <ReloadButton handleRefresh={this.handleRefresh} />
         <>
