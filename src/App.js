@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { apiKeyDarkSky, apiKeyBing, proxyUrl } from './Api';
 import Header from './Header';
+import Loader from './Loader';
 import Weather from './Weather';
 import Today from './Today';
 import ReloadButton from './ReloadButton';
@@ -106,16 +107,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-
-
-        {/* Loader should be own component */}
-        <section className="loading">
           {(isLoading) &&
-            <div className="loadingWeather">
-              <h3>loading</h3>
-            </div>
+            <Loader />
           }
-        </section>
         <section className="geolocation">
           {(!currentPosition && !isLoading) &&
             <div className="error">

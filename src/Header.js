@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import colors from './utils/colors';
 
 const Background = styled.header`
-  background: ${colors.gray5};
+  background: ${colors.offWhite};
   width: 100%;
   padding: 64px 8px;
-  border-bottom: 2px solid ${colors.gray3};
+  border-bottom: 2px solid ${colors.gray4};
   position: relative;
   top: 0;
   text-align: center;
