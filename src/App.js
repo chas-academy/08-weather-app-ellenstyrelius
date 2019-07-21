@@ -54,7 +54,6 @@ class App extends Component {
           hasError: true,
           isLoading: false
         })
-        console.log('🐐: App -> fetchWeatherData -> error', error)
       });
   }
 
@@ -103,8 +102,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('🐐: App -> render -> this.state', this.state)
-    
     const { currentAddress, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
     
     return (
@@ -124,20 +121,15 @@ class App extends Component {
             <Today time={weather.currently.time}/>
           </>
         }
-        <>
-          {(!weather && hasError && !fallbackRome) && 
-            <div className="error">
-              <p>Sorry, something went wrong <span role="img" aria-label="robot face emoji">🤖</span></p>
-              <p>Maybe try again in a couple of minutes?</p>
-            </div>
-          }
-          {(weather && !isLoading) &&
-            <Weather 
-              weather={weather} 
-              tempIsCelsius={tempIsCelsius} 
-            />
-          }
-        </>
+        {(!weather && !fallbackRome && hasError) &&
+          <p>Oh no, something went terribly wrong! <span role="img" aria-label="robot face emoji">🤖</span></p>
+        }
+        {(weather && !isLoading) &&
+          <Weather 
+            weather={weather} 
+            tempIsCelsius={tempIsCelsius} 
+          />
+        }
         <Footer />
       </div>
     );
