@@ -9,7 +9,7 @@ import FlexCenterColumn from './utils/FlexCenterColumn';
 const Container = styled.section`
   width: 100%;
   margin: 64px auto 0;
-  padding: 32px 8px;
+  padding: 0 8px;
   text-align: center;
 `
 const WeatherItem = styled(FlexCenterColumn)`

@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { weekdays } from './utils/weekdays';
 import Icon from './utils/Icon';
 import FlexCenterColumn from './utils/FlexCenterColumn';
-import FlexCenterRow from './utils/FlexCenterRow'
 import colors from './utils/colors';
 
 const Container = styled.section`
   margin: 64px auto 0;
-  padding: 32px 8px;
+  padding: 0 8px;
   text-align: center;
 `
 const Dates = styled.p`
