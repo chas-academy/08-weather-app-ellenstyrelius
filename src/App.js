@@ -22,7 +22,7 @@ class App extends Component {
 
   fetchUserAddress(currentPosition) {
     const { latitude, longitude } = currentPosition;
-    const placeDataUrl = `http://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${process.env.REACT_APP_BING_API}`;
+    const placeDataUrl = `${proxyUrl}http://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${process.env.REACT_APP_BING_API}`;
     fetch(placeDataUrl)
       .then(res => res.json())
       .then(data => {
