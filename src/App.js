@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { apiKeyDarkSky, apiKeyBing, proxyUrl } from './Api';
+import proxyUrl from './utils/proxyUrl';
 import Header from './Header';
 import WeatherButtons from './WeatherButtons';
 import Loader from './Loader';
@@ -22,7 +22,7 @@ class App extends Component {
 
   fetchUserAddress(currentPosition) {
     const { latitude, longitude } = currentPosition;
-    const placeDataUrl = `${proxyUrl}http://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${apiKeyBing}`;
+    const placeDataUrl = `${proxyUrl}http://dev.virtualearth.net/REST/v1/Locations/${latitude},${longitude}?key=${process.env.REACT_APP_BING_API}`;
     fetch(placeDataUrl)
       .then(res => res.json())
       .then(data => {
@@ -37,7 +37,7 @@ class App extends Component {
 
   fetchWeatherData(currentPosition) {
     const { latitude, longitude } = currentPosition;
-    const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${apiKeyDarkSky}/${latitude},${longitude}?units=si`;
+    const weatherDataUrl = `${proxyUrl}https://api.darksky.net/forecast/${process.env.REACT_APP_DARKSKY_API}/${latitude},${longitude}?units=si`;
     fetch(weatherDataUrl)
       .then(res => res.json())
       .then(data => {
