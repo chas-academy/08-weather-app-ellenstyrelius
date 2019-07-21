@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import colors from './utils/colors';
 
 const Background = styled.footer`
-  background: ${colors.yellowLight};
-  height: 160px;
+  background: ${colors.gray5};
+  height: 100px;
   width: 100%;
   margin-top: 168px;
   display: flex;

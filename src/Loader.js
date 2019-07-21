@@ -10,7 +10,7 @@ const rotate = keyframes`
   }
 `
 const AnimatedLoader = styled.div`
-  margin-top: 104px;
+  margin: 200px 0;
   animation: ${rotate} 4s linear infinite;
 `
 

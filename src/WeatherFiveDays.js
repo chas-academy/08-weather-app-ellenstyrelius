@@ -9,12 +9,18 @@ import colors from './utils/colors';
 
 const Container = styled.section`
   margin: 64px auto 0;
+  padding: 32px 8px;
   text-align: center;
+`
+const Dates = styled.p`
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 300;
 `
 const WeatherItem = styled(FlexCenterColumn)`
   width: 320px;
   margin-top: 24px;
-  padding: 24px;
+  padding: 24px 0;
   border-bottom: 1px solid ${colors.gray4};
 `
 const Day = styled.p`
@@ -22,14 +28,20 @@ const Day = styled.p`
   font-weight: 300;
 `
 const Description = styled.p`
-  margin-top: 16px;
-  font-size: 24px;
+  margin-top: 8px;
+  font-size: 20px;
   font-weight: 300;
   font-style: italic;
 `
 const Text = styled.p`
   margin-top: 8px;
   color: ${colors.gray1};
+`
+const DayTemp = styled(Text)`
+  margin-top: 16px;
+  color: ${colors.gray2};
+  font-size: 28px;
+  font-weight: 400;
 `
 
 function WeatherFiveDays({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
@@ -42,8 +54,9 @@ function WeatherFiveDays({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
 
   return (
     <Container>
-      <h3>next five days</h3>
-      <Day>{firstDay} - {lastDay}</Day>
+      <h3>detailed forecast</h3>
+      <Dates>next five days</Dates>
+      <Dates>{firstDay} - {lastDay}</Dates>
       <FlexCenterColumn>
         {fiveDaysWeather.map((day, index) => {
           const { time, icon, summary, windSpeed, humidity, sunriseTime, sunsetTime } = day;
@@ -56,11 +69,10 @@ function WeatherFiveDays({ dailyWeather, tempIsCelsius, getFahrenheitTemp }) {
           return (
             <WeatherItem key={index}>
               <Day>{weekdays[new Date(time*1000).getDay()]}</Day>
-              <Icon icon={icon} stroke={colors.gray1} height='72' marginTop='16'/>
+              <Icon icon={icon} stroke={colors.gray2} height='72' marginTop='16'/>
+              <DayTemp>{tempIsCelsius ? celsiusHigh + ' °C' : fahrenheitHigh + ' °F'}</DayTemp>
               <Description>{summary}</Description>
-              <Text>daytime: {tempIsCelsius ? celsiusHigh + ' °C' : fahrenheitHigh + ' °F'}</Text>
-              <Text>nighttime: {tempIsCelsius ? celsiusLow + ' °C' : fahrenheitLow + ' °F'}</Text>
-              <Text>-</Text>
+              <Text>night temperature: {tempIsCelsius ? celsiusLow + ' °C' : fahrenheitLow + ' °F'}</Text>
               <Text>wind: {windSpeed} m/s</Text>
               <Text>humidity: {humidity}</Text>
               <Text>-</Text>

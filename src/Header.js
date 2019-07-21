@@ -4,26 +4,25 @@ import styled from 'styled-components';
 import colors from './utils/colors';
 
 const Background = styled.header`
-  background: ${colors.gray5};
+  background: ${colors.orangeLight};
   width: 100%;
   padding: 40px 8px;
-  border-bottom: 4px solid ${colors.offWhite};
   position: relative;
   top: 0;
   text-align: center;
 `
 const Title = styled.h1`
-  color: ${colors.gray1};
-  font-size: 56px;
-  font-weight: 100;
-  letter-spacing: 2px;
+  color: ${colors.offWhite};
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: 4px;
 `
 const SecondHeader = styled.h2`
-  color: ${colors.gray1};
+  color: ${colors.gray2};
   margin-top: 16px;
-  font-size: 32px;
-  font-weight: 200;
-  letter-spacing: 2px;
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 4px;
 `
 
 function Header() {

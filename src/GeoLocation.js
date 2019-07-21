@@ -5,7 +5,7 @@ import FlexCenterColumn from './utils/FlexCenterColumn';
 import colors from './utils/colors';
 
 const Container = styled(FlexCenterColumn)`
-  margin-top: 48px;
+  margin-top: 32px;
   padding: 16px;
   text-align: center;
 `
@@ -25,7 +25,7 @@ const ErrorContainer = styled.div`
 `
 const Header = styled.h2`
   margin-top: 24px;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 300;
 `
 

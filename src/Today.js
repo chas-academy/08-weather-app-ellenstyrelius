@@ -7,7 +7,7 @@ import { weekdays } from './utils/weekdays';
 const Text = styled.p`
   color: ${colors.gray1};
   font-size: 32px;
-  font-weight: 200;
+  font-weight: 300;
 `
 
 function Today({ time }) {

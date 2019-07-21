@@ -7,7 +7,7 @@ import Button from './utils/Button';
 const Btn = styled(Button)`
   color: ${colors.gray2};
   width: 110px;
-  margin-top: 16px;
+  margin-top: 24px;
   border-color: ${colors.gray2};
 
   &:hover {
