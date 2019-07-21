@@ -25,7 +25,8 @@ const ErrorContainer = styled.div`
 `
 const Header = styled.h2`
   margin-top: 24px;
-  font-size: 36px;
+  color: ${colors.gray1};
+  font-size: 32px;
   font-weight: 300;
 `
 

@@ -20,7 +20,7 @@ const WeatherItem = styled(FlexCenterColumn)`
   border-right 1px solid ${colors.gray4};
 `
 const Time = styled.p`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 200;
 `
 const Temp = styled.p`
@@ -33,10 +33,10 @@ const Text = styled.p`
   margin-top: 8px;
   font-size: 16px;
 `
-const everyThirdHourIndexes = [3, 6, 9, 12, 15, 18, 21, 24];
-const everyThirdHour= [];
 
 function Weather24Hours({ hourlyWeather, tempIsCelsius, getFahrenheitTemp }) {
+  const everyThirdHourIndexes = [3, 6, 9, 12, 15, 18, 21, 24];
+  const everyThirdHour= [];
 
   const getEveryThirdHour = () => {
     everyThirdHourIndexes.map(index =>
