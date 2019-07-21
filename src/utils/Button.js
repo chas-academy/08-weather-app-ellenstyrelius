@@ -11,7 +11,7 @@ const Button = styled.button`
   border-radius: 8px;
   box-shadow: 0px 1px 2px ${colors.gray3};
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
 
   &:hover {
     cursor: pointer;

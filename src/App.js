@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import { apiKeyDarkSky, apiKeyBing, proxyUrl } from './Api';
 import Header from './Header';
+import WeatherButtons from './WeatherButtons';
 import Loader from './Loader';
 import GeoLocation from './GeoLocation';
 import Today from './Today';
 import Weather from './Weather';
-import ReloadButton from './ReloadButton';
 import Footer from './Footer';
 
 class App extends Component {
@@ -88,6 +88,7 @@ class App extends Component {
   }
 
   handleRefresh = () => {
+    window.scrollTo(0, 0);
     this.setState({
       isLoading: true,
       fallbackRome: null
@@ -104,11 +105,16 @@ class App extends Component {
   render() {
     console.log('🐐: App -> render -> this.state', this.state)
     
-    const { currentPosition, currentAddress, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
+    const { currentAddress, weather, hasError, isLoading, fallbackRome, tempIsCelsius } = this.state;
     
     return (
       <div className="App">
         <Header />
+        <WeatherButtons 
+          handleRefresh={this.handleRefresh}
+          handleToggleUnit={this.handleToggleUnit}
+          tempIsCelsius={tempIsCelsius} 
+        />
         {isLoading &&
           <Loader />
         }
@@ -118,7 +124,6 @@ class App extends Component {
             <Today time={weather.currently.time}/>
           </>
         }
-        <ReloadButton handleRefresh={this.handleRefresh} />
         <>
           {(!weather && hasError && !fallbackRome) && 
             <div className="error">
@@ -127,7 +132,10 @@ class App extends Component {
             </div>
           }
           {(weather && !isLoading) &&
-            <Weather weather={weather} tempIsCelsius={tempIsCelsius} handleToggleUnit={this.handleToggleUnit} />
+            <Weather 
+              weather={weather} 
+              tempIsCelsius={tempIsCelsius} 
+            />
           }
         </>
         <Footer />

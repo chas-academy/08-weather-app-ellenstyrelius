@@ -5,7 +5,6 @@ import WeatherCurrent from './WeatherCurrent';
 import Weather24Hours from './Weather24Hours';
 import WeatherWeek from './WeatherWeek';
 import WeatherFiveDays from './WeatherFiveDays';
-import UnitButton from './UnitButton';
 
 const Container = styled.section`
   width: 100%;
@@ -20,7 +19,6 @@ function Weather({ weather, tempIsCelsius, handleToggleUnit }) {
       <WeatherCurrent
         {...{currentWeather, dailyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
-      <UnitButton handleToggleUnit={handleToggleUnit} tempIsCelsius={tempIsCelsius}/>
       <WeatherWeek 
         {...{dailyWeather, tempIsCelsius, getFahrenheitTemp}}
       />
