@@ -7,7 +7,7 @@ const Background = styled.footer`
   background: ${colors.yellowLight};
   height: 160px;
   width: 100%;
-  margin-top: 152px;
+  margin-top: 168px;
   display: flex;
   align-items: center;
   justify-content: center;
